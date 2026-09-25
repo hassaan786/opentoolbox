@@ -33,7 +33,7 @@ dropzone($('#drop'), {
       }, `${name}-images.zip`);
       $('#summary').textContent = `${current.results.length} pages ready`;
       $('#all').textContent = current.results.length > 1 ? `Download all (${current.results.length}) as ZIP` : 'Download';
-      doc.destroy();
+      doc.close();
     } catch (e) {
       console.error(e);
       prog.hide();

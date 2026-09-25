@@ -44,7 +44,7 @@ dropzone($('#drop'), {
           texts.push(n > 1 ? `--- Page ${i} ---\n${data.text.trim()}` : data.text.trim());
           out.textContent = texts.join('\n\n');
         }
-        doc.destroy();
+        doc.close();
       } else {
         pageLabel = '';
         const img = new Image();

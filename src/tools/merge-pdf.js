@@ -20,7 +20,7 @@ dropzone($('#drop'), {
         const doc = await openPdf(file);
         const thumb = (await renderPage(doc, 1, 0.4)).toDataURL('image/jpeg', 0.7);
         items.push({ file, pages: doc.numPages, thumb });
-        doc.destroy();
+        doc.close();
       } catch (e) { toast(`${file.name}: ${e.message}`); }
     }
     list.add(items);

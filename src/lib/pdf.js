@@ -2,8 +2,8 @@
 let lib;
 export async function pdfjs() {
   if (!lib) {
-    lib = await import('pdfjs-dist');
-    const { default: workerUrl } = await import('pdfjs-dist/build/pdf.worker.min.mjs?url');
+    lib = await import('pdfjs-dist/legacy/build/pdf.min.mjs');
+    const { default: workerUrl } = await import('pdfjs-dist/legacy/build/pdf.worker.min.mjs?url');
     lib.GlobalWorkerOptions.workerSrc = workerUrl;
   }
   return lib;
@@ -12,7 +12,10 @@ export async function pdfjs() {
 export async function openPdf(file) {
   const { getDocument } = await pdfjs();
   try {
-    return await getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false }).promise;
+    const task = getDocument({ data: new Uint8Array(await file.arrayBuffer()), isEvalSupported: false });
+    const doc = await task.promise;
+    doc.close = () => task.destroy();
+    return doc;
   } catch (e) {
     if (e?.name === 'PasswordException') throw new Error('This PDF is password-protected.');
     throw new Error('Could not open that PDF.');
