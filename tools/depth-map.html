@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:depth-map--></head>
+<body>
+<!--@toolstart:depth-map-->
+<div class="panel stack">
+  <!--@drop:drop|Drop a photo, or click to choose|JPG, PNG or WebP. Scenes with clear foreground and background work best.-->
+  <!--@progress-->
+  <div id="result" hidden class="stack">
+    <div class="row-wrap">
+      <div class="seg" id="view" role="group" aria-label="View">
+        <button type="button" data-view="depth" aria-pressed="true">Depth map</button>
+        <button type="button" data-view="color" aria-pressed="false">Color map</button>
+        <button type="button" data-view="3d" aria-pressed="false">3D tilt</button>
+      </div>
+      <label class="check"><input type="checkbox" id="invert"> Invert</label>
+    </div>
+    <div class="stage" id="stage" style="perspective:900px"></div>
+    <div class="row-wrap">
+      <button class="btn" id="dl" type="button">Download depth PNG</button>
+      <button class="btn-ghost" id="again" type="button">Try another</button>
+      <span class="spacer"></span>
+      <span class="hint" id="info"></span>
+    </div>
+  </div>
+</div>
+<!--@toolend:depth-map-->
+</body>
+</html>

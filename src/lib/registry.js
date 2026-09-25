@@ -17,7 +17,7 @@ export const TOOLS = [
   t('background-remover', 'Background Remover', 'image-ai', 'BiRefNet lite', 'MIT', 'Cut out people, products and pets in one click. Full resolution, no watermark.', true),
   t('image-upscaler', 'Image Upscaler', 'image-ai', 'Swin2SR', 'Apache-2.0', 'Enlarge small photos 2× or 4× with AI detail recovery.', true),
   t('depth-map', 'Depth Map', 'image-ai', 'Depth Anything V2 Small', 'Apache-2.0', '3D depth from one photo, for parallax effects and editing.', true),
-  t('alt-text-generator', 'Alt Text Generator', 'image-ai', 'ViT-GPT2', 'Apache-2.0', 'Describe any image in a sentence for SEO and accessibility.', true),
+  t('alt-text-generator', 'Alt Text & Image Captions', 'image-ai', 'Florence-2 base', 'MIT', 'Describe any image in one line or in detail, for SEO and accessibility.', true),
   t('object-eraser', 'Object Eraser', 'image-ai', 'LaMa', 'Apache-2.0', 'Brush over people, text or clutter and it disappears.', true, 'soon'),
   t('text-to-image', 'Text to Image', 'image-ai', 'SD-Turbo', 'Stability Community', 'Type a prompt, get an image on your GPU.', true, 'soon'),
 

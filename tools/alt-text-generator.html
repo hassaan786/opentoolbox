@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:alt-text-generator--></head>
+<body>
+<!--@toolstart:alt-text-generator-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field">
+      <span class="label">Detail</span>
+      <div class="seg" id="detail" role="group" aria-label="Detail level">
+        <button type="button" data-task="&lt;CAPTION&gt;" aria-pressed="true">Short alt text</button>
+        <button type="button" data-task="&lt;DETAILED_CAPTION&gt;" aria-pressed="false">Detailed</button>
+        <button type="button" data-task="&lt;MORE_DETAILED_CAPTION&gt;" aria-pressed="false">Full description</button>
+      </div>
+    </div>
+    <!--@drop:drop|Drop an image, or click to choose|JPG, PNG or WebP. Paste with Ctrl+V works too.-->
+    <div class="stage" id="preview" hidden></div>
+  </div>
+  <div class="panel stack">
+    <div class="panel-title">Result</div>
+    <!--@progress-->
+    <p class="output prose" id="out" aria-live="polite">Your description will appear here.</p>
+    <div class="row-wrap">
+      <button class="btn" id="copy" type="button" disabled>Copy text</button>
+      <button class="btn-ghost" id="copy-html" type="button" disabled>Copy as &lt;img alt&gt;</button>
+      <button class="btn-ghost" id="rerun" type="button" disabled>Run again</button>
+    </div>
+    <p class="hint">The model is about 280&nbsp;MB and downloads once. The first run takes a while; after that it is quick.</p>
+  </div>
+</div>
+<!--@toolend:alt-text-generator-->
+</body>
+</html>

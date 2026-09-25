@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:image-upscaler--></head>
+<body>
+<!--@toolstart:image-upscaler-->
+<div class="panel stack">
+  <div class="row-wrap">
+    <div class="field">
+      <span class="label">Scale</span>
+      <div class="seg" id="scale" role="group" aria-label="Scale">
+        <button type="button" data-scale="2" aria-pressed="true">2× · sharp detail</button>
+        <button type="button" data-scale="4" aria-pressed="false">4× · real-world photos</button>
+      </div>
+    </div>
+    <p class="hint" id="limit-hint" style="align-self:flex-end"></p>
+  </div>
+  <!--@drop:drop|Drop an image, or click to choose|JPG, PNG or WebP. Small images give the best results.-->
+  <!--@progress-->
+  <div id="result" hidden class="stack">
+    <div class="stage" id="stage"></div>
+    <div class="row-wrap">
+      <button class="btn" id="dl" type="button">Download PNG</button>
+      <button class="btn-ghost" id="again" type="button">Upscale another</button>
+      <span class="spacer"></span>
+      <span class="hint" id="info"></span>
+    </div>
+  </div>
+</div>
+<!--@toolend:image-upscaler-->
+</body>
+</html>
