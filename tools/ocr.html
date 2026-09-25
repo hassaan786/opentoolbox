@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:ocr--></head>
+<body>
+<!--@toolstart:ocr-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field">
+      <label for="lang">Language in the image</label>
+      <select id="lang">
+        <option value="eng">English</option>
+        <option value="urd">Urdu</option>
+        <option value="eng+urd">English + Urdu</option>
+        <option value="hin">Hindi</option>
+        <option value="ara">Arabic</option>
+        <option value="spa">Spanish</option>
+        <option value="fra">French</option>
+        <option value="deu">German</option>
+        <option value="por">Portuguese</option>
+        <option value="tur">Turkish</option>
+        <option value="ita">Italian</option>
+        <option value="rus">Russian</option>
+        <option value="chi_sim">Chinese (Simplified)</option>
+        <option value="jpn">Japanese</option>
+      </select>
+    </div>
+    <!--@drop:drop|Drop an image or PDF, or click to choose|Photos of documents, screenshots, scanned PDFs (up to 20 pages).-->
+    <div class="stage" id="preview" hidden></div>
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Extracted text</div><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy" type="button">Copy</button><button class="btn-ghost btn-sm" id="dl" type="button">.txt</button></div>
+    <!--@progress-->
+    <pre class="output prose" id="out" style="min-height:320px"></pre>
+  </div>
+</div>
+<!--@toolend:ocr-->
+</body>
+</html>

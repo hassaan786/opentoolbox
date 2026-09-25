@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:image-converter--></head>
+<body>
+<!--@toolstart:image-converter-->
+<div class="panel stack">
+  <div class="grid-3"><div class="field"><label for="format">Convert to</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp" selected>WebP</option><option value="image/avif">AVIF</option></select></div><div class="field"><label for="quality">Quality (JPG/WebP/AVIF): <span id="q-val">90</span></label><input type="range" id="quality" min="40" max="100" value="90"></div><div class="field"><label for="bg">Background for JPG</label><input type="color" id="bg" value="#ffffff"></div></div>
+  <!--@drop:drop|Drop images, or click to choose|PNG, JPG, WebP, GIF (first frame), BMP, SVG or AVIF.-->
+  <!--@batch-->
+</div>
+<!--@toolend:image-converter-->
+</body>
+</html>

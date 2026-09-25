@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:qr-code--></head>
+<body>
+<!--@toolstart:qr-code-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field">
+      <span class="label">Type</span>
+      <div class="seg" id="type" role="group" aria-label="QR type">
+        <button type="button" data-type="url" aria-pressed="true">Link</button>
+        <button type="button" data-type="text" aria-pressed="false">Text</button>
+        <button type="button" data-type="wifi" aria-pressed="false">Wi-Fi</button>
+        <button type="button" data-type="email" aria-pressed="false">Email</button>
+      </div>
+    </div>
+    <div data-panel="url" class="field"><label for="url">Link</label><input type="url" id="url" value="https://github.com/hassaan786/opentoolbox"></div>
+    <div data-panel="text" class="field" hidden><label for="text">Text</label><textarea id="text" class="prose" rows="4">Hello from OpenToolbox</textarea></div>
+    <div data-panel="wifi" class="stack" hidden>
+      <div class="grid-2">
+        <div class="field"><label for="ssid">Network name</label><input type="text" id="ssid" autocomplete="off"></div>
+        <div class="field"><label for="wpass">Password</label><input type="text" id="wpass" autocomplete="off"></div>
+      </div>
+      <div class="field"><label for="enc">Security</label><select id="enc"><option value="WPA">WPA/WPA2/WPA3</option><option value="WEP">WEP</option><option value="nopass">None</option></select></div>
+    </div>
+    <div data-panel="email" class="stack" hidden>
+      <div class="field"><label for="to">To</label><input type="text" id="to" placeholder="name@example.com"></div>
+      <div class="field"><label for="subj">Subject</label><input type="text" id="subj"></div>
+    </div>
+    <div class="grid-3">
+      <div class="field"><label for="fg">Color</label><input type="color" id="fg" value="#0B0B0C"></div>
+      <div class="field"><label for="bg">Background</label><input type="color" id="bg" value="#FFFFFF"></div>
+      <div class="field"><label for="ecc">Error correction</label><select id="ecc"><option value="L">Low</option><option value="M" selected>Medium</option><option value="Q">High</option><option value="H">Highest</option></select></div>
+    </div>
+  </div>
+  <div class="panel stack" style="align-items:center">
+    <canvas id="qr" width="320" height="320" style="border-radius:12px;background:#fff;max-width:100%" aria-label="QR code preview"></canvas>
+    <div class="row-wrap">
+      <button class="btn" id="png" type="button">Download PNG</button>
+      <button class="btn-ghost" id="svg" type="button">Download SVG</button>
+    </div>
+    <p class="error" id="err"></p>
+  </div>
+</div>
+<!--@toolend:qr-code-->
+</body>
+</html>

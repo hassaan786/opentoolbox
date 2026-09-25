@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:image-to-pdf--></head>
+<body>
+<!--@toolstart:image-to-pdf-->
+<div class="panel stack">
+  <div class="grid-3">
+    <div class="field"><label for="size">Page size</label><select id="size"><option value="fit">Same as each image</option><option value="a4">A4</option><option value="letter">US Letter</option></select></div>
+    <div class="field"><label for="orient">Orientation (A4/Letter)</label><select id="orient"><option value="auto">Auto</option><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div>
+    <div class="field"><label for="margin">Margin (A4/Letter)</label><select id="margin"><option value="0">None</option><option value="24" selected>Small</option><option value="48">Large</option></select></div>
+  </div>
+  <!--@drop:drop|Drop images, or click to choose|JPG, PNG, WebP. One image per page, in the order below.-->
+  <div class="thumbs" id="list"></div>
+  <div class="row-wrap">
+    <button class="btn" id="go" type="button" disabled>Create PDF</button>
+    <button class="btn-ghost" id="clear" type="button">Clear</button>
+  </div>
+  <!--@progress-->
+</div>
+<!--@toolend:image-to-pdf-->
+</body>
+</html>

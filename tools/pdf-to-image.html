@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:pdf-to-image--></head>
+<body>
+<!--@toolstart:pdf-to-image-->
+<div class="panel stack">
+  <div class="grid-3">
+    <div class="field"><label for="format">Format</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option></select></div>
+    <div class="field"><label for="dpi">Resolution</label><select id="dpi"><option value="1">72 DPI (screen)</option><option value="2" selected>144 DPI (sharp)</option><option value="4.17">300 DPI (print)</option></select></div>
+    <div class="field"><label for="pages">Pages (optional)</label><input type="text" id="pages" placeholder="All pages, or e.g. 1-3, 7"></div>
+  </div>
+  <!--@drop:drop|Drop a PDF, or click to choose|Each page becomes an image.-->
+  <!--@progress-->
+  <!--@batch-->
+</div>
+<!--@toolend:pdf-to-image-->
+</body>
+</html>

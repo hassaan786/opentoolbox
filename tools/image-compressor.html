@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:image-compressor--></head>
+<body>
+<!--@toolstart:image-compressor-->
+<div class="panel stack">
+  <div class="grid-3"><div class="field"><label for="quality">Quality: <span id="q-val">75</span></label><input type="range" id="quality" min="30" max="95" value="75"></div><div class="field"><label for="format">Output format</label><select id="format"><option value="same">Auto (JPG and WebP stay the same, PNG becomes WebP)</option><option value="image/webp">WebP (smallest)</option><option value="image/jpeg">JPG</option></select></div><div class="field"><label for="maxw">Max width (optional)</label><input type="number" id="maxw" min="16" placeholder="e.g. 1920"></div></div>
+  <!--@drop:drop|Drop images, or click to choose|Up to 50 JPG, PNG or WebP files at once.-->
+  <!--@batch-->
+</div>
+<!--@toolend:image-compressor-->
+</body>
+</html>

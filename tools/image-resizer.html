@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:image-resizer--></head>
+<body>
+<!--@toolstart:image-resizer-->
+<div class="panel stack">
+  <div class="grid-3"><div class="field"><span class="label">Resize by</span><div class="seg" id="mode" role="group" aria-label="Resize by"><button type="button" data-mode="px" aria-pressed="true">Pixels</button><button type="button" data-mode="pct" aria-pressed="false">Percent</button></div></div><div class="field" data-for="px"><label for="w">Width × height (px)</label><div class="row-wrap" style="flex-wrap:nowrap"><input type="number" id="w" min="1" placeholder="Width"><span aria-hidden="true">×</span><input type="number" id="h" min="1" placeholder="Height"></div><label class="check"><input type="checkbox" id="keep" checked> Keep aspect ratio (fill one box)</label></div><div class="field" data-for="pct" hidden><label for="pct">Scale: <span id="pct-val">50%</span></label><input type="range" id="pct" min="5" max="200" value="50"></div></div>
+  <!--@drop:drop|Drop images, or click to choose|Resized copies keep the original format.-->
+  <!--@batch-->
+</div>
+<!--@toolend:image-resizer-->
+</body>
+</html>

@@ -105,6 +105,7 @@ const partials = () => ({
         partial('text-tool').replace('<!--@options-->', '').replace('<!--@action-->', esc(action)))
       .replace(/<!--@toolhead:([a-z0-9-]+)-->/, (_, s) => `${toolHead(s)}\n<!--@head-->`)
       .replace('<!--@head-->', partial('head'))
+      .replace('<!--@batch-->', partial('batch'))
       .replace(/<!--@progress(?::([a-z0-9-]+))?-->/g, (_, id = 'progress') =>
         `<div class="progress" id="${id}" hidden><div class="progress-top"><span data-label>Loading…</span><span data-pct></span></div><div class="bar"><i></i></div></div>`)
       .replace(/<!--@drop:([a-z0-9-]+)\|([^|]*)\|([^>]*)-->/g, (_, id, title, sub) =>

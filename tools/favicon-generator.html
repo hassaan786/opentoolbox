@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:favicon-generator--></head>
+<body>
+<!--@toolstart:favicon-generator-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field">
+      <span class="label">Source</span>
+      <div class="seg" id="src-mode" role="group" aria-label="Source">
+        <button type="button" data-src="image" aria-pressed="true">Image</button>
+        <button type="button" data-src="text" aria-pressed="false">Text or emoji</button>
+      </div>
+    </div>
+    <div data-src-panel="image">
+      <!--@drop:drop|Drop a square logo, or click to choose|PNG or SVG, 512×512 or larger works best.-->
+    </div>
+    <div data-src-panel="text" hidden class="stack">
+      <div class="grid-2">
+        <div class="field"><label for="txt">Text (1–2 characters)</label><input type="text" id="txt" maxlength="2" value="OT"></div>
+        <div class="field"><label for="font">Font</label><select id="font"><option value="Space Grotesk, sans-serif">Space Grotesk</option><option value="Georgia, serif">Serif</option><option value="ui-monospace, monospace">Mono</option></select></div>
+      </div>
+      <div class="row-wrap">
+        <div class="field"><label for="fg">Text color</label><input type="color" id="fg" value="#0B0B0C"></div>
+        <div class="field"><label for="bgc">Background</label><input type="color" id="bgc" value="#C8F547"></div>
+        <div class="field" style="flex:1"><label for="radius">Corner radius: <span id="r-val">22%</span></label><input type="range" id="radius" min="0" max="50" value="22"></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel stack">
+    <div class="panel-title">Preview</div>
+    <div class="row-wrap" id="previews" style="align-items:flex-end;gap:18px"></div>
+    <div class="row-wrap">
+      <button class="btn" id="zip" type="button" disabled>Download all (ZIP)</button>
+      <button class="btn-ghost" id="copy" type="button" disabled>Copy HTML</button>
+    </div>
+    <pre class="output" id="snippet"></pre>
+  </div>
+</div>
+<!--@toolend:favicon-generator-->
+</body>
+</html>

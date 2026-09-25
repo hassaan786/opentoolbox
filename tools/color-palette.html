@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:color-palette--></head>
+<body>
+<!--@toolstart:color-palette-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field"><label for="count">Number of colors: <span id="c-val">6</span></label><input type="range" id="count" min="3" max="12" value="6"></div>
+    <!--@drop:drop|Drop an image, or click to choose|Photos, screenshots, artwork. Paste works too.-->
+    <div class="stage" id="preview" hidden></div>
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Palette</div><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy-css" type="button" disabled>Copy as CSS</button><button class="btn-ghost btn-sm" id="copy-json" type="button" disabled>Copy JSON</button></div>
+    <div class="swatches" id="swatches"><p class="hint">Colors appear here. Click a swatch to copy its HEX.</p></div>
+  </div>
+</div>
+<!--@toolend:color-palette-->
+</body>
+</html>
