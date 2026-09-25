@@ -57,18 +57,23 @@ const CPU_ONLY_KEY = 'otb.cpuOnly';
 const cpuOnly = () => { try { return JSON.parse(localStorage.getItem(CPU_ONLY_KEY) || '[]'); } catch { return []; } };
 const markCpuOnly = (model) => { try { localStorage.setItem(CPU_ONLY_KEY, JSON.stringify([...new Set([...cpuOnly(), model])])); } catch { /* storage blocked */ } };
 
-export function createModel({ task, model, dtype, preferGPU = true }) {
+export class GpuUnsupportedError extends Error {}
+
+/** gpuOnly: the model is too large for CPU/WASM memory; throw GpuUnsupportedError instead of falling back. */
+export function createModel({ task, model, dtype, preferGPU = true, gpuOnly = false }) {
   let resolved;
   let forceCPU = cpuOnly().includes(model);
   const resolveSpec = async () => {
     if (resolved) return resolved;
     const gpu = preferGPU && !forceCPU && (await hasWebGPU());
+    if (gpuOnly && !gpu) throw new GpuUnsupportedError('This model needs a GPU that supports it.');
     const device = gpu ? 'webgpu' : 'wasm';
     const d = typeof dtype === 'object' ? dtype[device] : dtype;
     resolved = { task, model, device, dtype: d };
     return resolved;
   };
   const toCPU = (progress) => {
+    if (gpuOnly) { markCpuOnly(model); throw new GpuUnsupportedError('Your GPU cannot run this model.'); }
     forceCPU = true;
     resolved = null;
     markCpuOnly(model);

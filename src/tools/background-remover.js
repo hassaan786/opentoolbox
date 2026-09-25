@@ -1,8 +1,9 @@
 import { $, $$, dropzone, progress, download, loadImage, canvasToBlob, compareSlider, baseName, toast } from '../lib/ui.js';
-import { createModel, imageResultToCanvas } from '../lib/ai.js';
+import { createModel, imageResultToCanvas, GpuUnsupportedError } from '../lib/ai.js';
 
 const MODELS = {
-  best: createModel({ task: 'background-removal', model: 'onnx-community/BiRefNet_lite-ONNX', dtype: { webgpu: 'fp16', wasm: 'fp32' } }),
+  // BiRefNet runs out of WASM memory on CPU, so it is GPU-only; other devices use MODNet.
+  best: createModel({ task: 'background-removal', model: 'onnx-community/BiRefNet_lite-ONNX', dtype: 'fp16', gpuOnly: true }),
   fast: createModel({ task: 'background-removal', model: 'Xenova/modnet', dtype: { webgpu: 'fp32', wasm: 'q8' } }),
 };
 
@@ -41,22 +42,34 @@ function render() {
   compareSlider($('#stage'), before, composed());
 }
 
+async function runWith(model, file) {
+  await model.load((p, label) => prog.set(p, label));
+  prog.busy(`Removing background on your ${(await model.device()) === 'webgpu' ? 'GPU' : 'CPU'}…`);
+  return model.run(file, {}, (p, l) => prog.set(p, l));
+}
+
 async function handle([file]) {
   fileName = baseName(file.name);
   drop.hidden = true;
   result.hidden = true;
   try {
     original = await loadImage(file);
-    const model = MODELS[$('#quality').value];
-    await model.load((p, label) => prog.set(p, label));
-    prog.busy(`Removing background on your ${(await model.device()) === 'webgpu' ? 'GPU' : 'CPU'}…`);
     const t0 = performance.now();
-    const out = await model.run(file, {}, (p, l) => prog.set(p, l));
+    let note = '';
+    let out;
+    try {
+      out = await runWith(MODELS[$('#quality').value], file);
+    } catch (err) {
+      if (!(err instanceof GpuUnsupportedError) && !/OrtRun|GPU/i.test(err.message)) throw err;
+      note = ' · used the fast model (this device cannot run the best one)';
+      $('#quality').value = 'fast';
+      out = await runWith(MODELS.fast, file);
+    }
     cutout = imageResultToCanvas(out);
     prog.hide();
     render();
     result.hidden = false;
-    $('#info').textContent = `${cutout.width} × ${cutout.height}px · ${((performance.now() - t0) / 1000).toFixed(1)}s`;
+    $('#info').textContent = `${cutout.width} × ${cutout.height}px · ${((performance.now() - t0) / 1000).toFixed(1)}s${note}`;
   } catch (err) {
     console.error(err);
     prog.hide();
