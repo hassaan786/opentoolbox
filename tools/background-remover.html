@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:background-remover--></head>
+<body>
+<!--@toolstart:background-remover-->
+
+<div class="panel stack">
+  <div class="row-wrap">
+    <div class="field" style="min-width:240px">
+      <label for="quality">Model</label>
+      <select id="quality">
+        <option value="best">Best quality · BiRefNet (~115 MB, once)</option>
+        <option value="fast">Fast · MODNet, best for portraits (~25 MB)</option>
+      </select>
+    </div>
+    <div class="field">
+      <span class="label">Background</span>
+      <div class="seg" id="bg-mode" role="group" aria-label="Background">
+        <button type="button" data-bg="transparent" aria-pressed="true">Transparent</button>
+        <button type="button" data-bg="#FFFFFF" aria-pressed="false">White</button>
+        <button type="button" data-bg="color" aria-pressed="false">Color</button>
+      </div>
+    </div>
+    <div class="field" id="color-field" hidden>
+      <label for="bg-color">Color</label>
+      <input type="color" id="bg-color" value="#C8F547">
+    </div>
+  </div>
+
+  <div class="dropzone" id="drop">
+    <input type="file" aria-label="Choose an image">
+    <div class="dz-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg></div>
+    <div class="dz-title">Drop an image, or click to choose</div>
+    <div class="dz-sub">JPG, PNG or WebP. You can also paste with Ctrl+V.</div>
+  </div>
+
+  <div class="progress" id="progress" hidden>
+    <div class="progress-top"><span data-label>Loading…</span><span data-pct></span></div>
+    <div class="bar"><i></i></div>
+  </div>
+
+  <div id="result" hidden class="stack">
+    <div class="stage checker-bg" id="stage"></div>
+    <div class="row-wrap">
+      <button class="btn" id="dl" type="button">Download PNG</button>
+      <button class="btn-ghost" id="again" type="button">Remove another</button>
+      <span class="spacer"></span>
+      <span class="hint" id="info"></span>
+    </div>
+  </div>
+</div>
+
+<!--@toolend:background-remover-->
+</body>
+</html>
