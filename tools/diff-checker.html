@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:diff-checker--></head>
+<body>
+<!--@toolstart:diff-checker-->
+<div class="grid-2">
+  <div class="panel stack"><div class="field"><label for="a">Original</label><textarea id="a" rows="12" spellcheck="false">The quick brown fox
+jumps over
+the lazy dog.</textarea></div></div>
+  <div class="panel stack"><div class="field"><label for="b">Changed</label><textarea id="b" rows="12" spellcheck="false">The quick brown fox
+leaps over
+the lazy dog.
+Again.</textarea></div></div>
+</div>
+<div class="panel stack" style="margin-top:16px">
+  <div class="row-wrap"><div class="panel-title" style="margin:0">Differences</div><span class="hint" id="stats"></span><span class="spacer"></span><label class="check"><input type="checkbox" id="ws"> Ignore whitespace</label></div>
+  <div id="out" class="output" style="padding:8px"></div>
+</div>
+<!--@toolend:diff-checker-->
+</body>
+</html>

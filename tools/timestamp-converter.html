@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:timestamp-converter--></head>
+<body>
+<!--@toolstart:timestamp-converter-->
+<div class="panel stack">
+  <div class="row-wrap"><div class="panel-title" style="margin:0">Now</div><span class="spacer"></span><code class="meta" id="now"></code></div>
+  <div class="grid-2">
+    <div class="field"><label for="epoch">Unix timestamp (seconds or milliseconds)</label><input type="text" id="epoch" inputmode="numeric" spellcheck="false"></div>
+    <div class="field"><label for="date">Date and time (your time zone)</label><input type="datetime-local" id="date" step="1"></div>
+  </div>
+</div>
+<div class="panel"><table class="data"><tbody id="rows"></tbody></table></div>
+<!--@toolend:timestamp-converter-->
+</body>
+</html>

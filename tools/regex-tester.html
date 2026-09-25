@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:regex-tester--></head>
+<body>
+<!--@toolstart:regex-tester-->
+<div class="panel stack">
+  <div class="row-wrap" style="flex-wrap:nowrap">
+    <div class="field" style="flex:1"><label for="pattern">Pattern</label><input type="text" id="pattern" spellcheck="false" value="\b[\w.+-]+@[\w-]+\.[\w.]+\b" style="font-family:var(--mono)"></div>
+    <div class="field" style="width:120px"><label for="flags">Flags</label><input type="text" id="flags" value="gi" spellcheck="false" style="font-family:var(--mono)"></div>
+  </div>
+  <div class="field"><label for="text">Test string</label><textarea id="text" rows="8" spellcheck="false">Contact hello@example.com or sales@opentoolbox.dev for details.</textarea></div>
+  <p class="error" id="err"></p>
+</div>
+<div class="panel stack">
+  <div class="panel-title" id="count">Matches</div>
+  <pre class="output" id="highlight" style="white-space:pre-wrap"></pre>
+  <pre class="output" id="out"></pre>
+</div>
+<!--@toolend:regex-tester-->
+</body>
+</html>

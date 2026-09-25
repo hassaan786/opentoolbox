@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:base64--></head>
+<body>
+<!--@toolstart:base64-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field"><label for="input">Input</label><textarea id="input" rows="12" spellcheck="false" placeholder="Text or Base64…"></textarea></div>
+    <div class="row-wrap">
+      <button class="btn" id="enc" type="button">Encode →</button>
+      <button class="btn-ghost" id="dec" type="button">← Decode</button>
+      <label class="check"><input type="checkbox" id="urlsafe"> URL-safe</label>
+    </div>
+    <p class="error" id="err"></p>
+    <!--@drop:drop|Or drop a file to get a data URL|Images and small files work best.-->
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Output</div><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy" type="button">Copy</button></div>
+    <pre class="output" id="out" style="min-height:300px"></pre>
+  </div>
+</div>
+<!--@toolend:base64-->
+</body>
+</html>

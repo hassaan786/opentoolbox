@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:hash-generator--></head>
+<body>
+<!--@toolstart:hash-generator-->
+<div class="panel stack">
+  <div class="row-wrap"><div class="panel-title" style="margin:0">UUID v4</div><span class="spacer"></span><select id="n" aria-label="How many" style="width:auto"><option>1</option><option>5</option><option>10</option><option>50</option></select><button class="btn btn-sm" id="uuid" type="button">Generate</button><button class="btn-ghost btn-sm" id="copy-uuid" type="button">Copy</button></div>
+  <pre class="output" id="uuids"></pre>
+</div>
+<div class="panel stack">
+  <div class="panel-title">Hash text or a file</div>
+  <div class="field"><label for="text">Text</label><textarea id="text" rows="4" spellcheck="false" placeholder="Type to hash…"></textarea></div>
+  <!--@drop:drop|Or drop a file to get its checksum|Any file. It is read locally, never uploaded.-->
+  <div id="hashes" class="stack"></div>
+</div>
+<!--@toolend:hash-generator-->
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:json-formatter--></head>
+<body>
+<!--@toolstart:json-formatter-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field"><label for="input">Input JSON</label><textarea id="input" rows="18" spellcheck="false" placeholder="{&quot;hello&quot;: &quot;world&quot;}"></textarea></div>
+    <div class="row-wrap">
+      <button class="btn" id="format" type="button">Format</button>
+      <button class="btn-ghost" id="minify" type="button">Minify</button>
+      <select id="indent" aria-label="Indent" style="width:auto"><option value="2">2 spaces</option><option value="4">4 spaces</option><option value="tab">Tabs</option></select>
+      <label class="check"><input type="checkbox" id="sort"> Sort keys</label>
+    </div>
+    <p class="error" id="err"></p>
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Output</div><span class="hint" id="stats"></span><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy" type="button">Copy</button><button class="btn-ghost btn-sm" id="dl" type="button">.json</button></div>
+    <pre class="output" id="out" style="min-height:380px"></pre>
+  </div>
+</div>
+<!--@toolend:json-formatter-->
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:url-encoder--></head>
+<body>
+<!--@toolstart:url-encoder-->
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field"><label for="input">Input</label><textarea id="input" rows="10" spellcheck="false">https://example.com/search?q=free tools&amp;lang=ur</textarea></div>
+    <div class="row-wrap">
+      <button class="btn" id="enc" type="button">Encode →</button>
+      <button class="btn-ghost" id="dec" type="button">← Decode</button>
+      <select id="mode" aria-label="Mode" style="width:auto"><option value="component">Component (query values)</option><option value="uri">Full URL</option></select>
+    </div>
+    <p class="error" id="err"></p>
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Output</div><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy" type="button">Copy</button></div>
+    <pre class="output" id="out"></pre>
+    <div id="parts"></div>
+  </div>
+</div>
+<!--@toolend:url-encoder-->
+</body>
+</html>
