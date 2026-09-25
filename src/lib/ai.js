@@ -97,7 +97,7 @@ export async function decodeAudio(file, sampleRate = 16000) {
   const ctx = new AudioContext({ sampleRate });
   try {
     const audio = await ctx.decodeAudioData(buf);
-    if (audio.numberOfChannels === 1) return audio.getChannelData(0);
+    if (audio.numberOfChannels === 1) return new Float32Array(audio.getChannelData(0));
     const a = audio.getChannelData(0);
     const b = audio.getChannelData(1);
     const mono = new Float32Array(a.length);

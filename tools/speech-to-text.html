@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:speech-to-text--></head>
+<body>
+<!--@toolstart:speech-to-text-->
+<div class="panel stack">
+  <div class="grid-3">
+    <div class="field">
+      <label for="size">Model</label>
+      <select id="size">
+        <option value="base">Fast · Whisper base (~80 MB)</option>
+        <option value="small">Accurate · Whisper small (~250 MB)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="lang">Spoken language</label>
+      <select id="lang">
+        <option value="">Detect automatically</option>
+        <option value="english">English</option>
+        <option value="urdu">Urdu</option>
+        <option value="hindi">Hindi</option>
+        <option value="arabic">Arabic</option>
+        <option value="spanish">Spanish</option>
+        <option value="french">French</option>
+        <option value="german">German</option>
+        <option value="portuguese">Portuguese</option>
+        <option value="turkish">Turkish</option>
+        <option value="russian">Russian</option>
+        <option value="chinese">Chinese</option>
+        <option value="japanese">Japanese</option>
+        <option value="korean">Korean</option>
+        <option value="indonesian">Indonesian</option>
+        <option value="italian">Italian</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="task">Output</label>
+      <select id="task">
+        <option value="transcribe">Same language as spoken</option>
+        <option value="translate">Translate to English</option>
+      </select>
+    </div>
+  </div>
+  <!--@drop:drop|Drop audio or video, or click to choose|MP3, WAV, M4A, OGG, MP4, WebM or MOV. Long files take longer.-->
+  <!--@progress-->
+  <div id="result" hidden class="stack">
+    <div id="media"></div>
+    <pre class="output prose" id="out"></pre>
+    <div class="row-wrap">
+      <button class="btn" id="copy" type="button">Copy text</button>
+      <button class="btn-ghost" id="dl-txt" type="button">Download .txt</button>
+      <button class="btn-ghost" id="dl-srt" type="button">Download .srt</button>
+      <button class="btn-ghost" id="dl-vtt" type="button">Download .vtt</button>
+      <span class="spacer"></span>
+      <button class="btn-ghost" id="again" type="button">New file</button>
+    </div>
+  </div>
+</div>
+<!--@toolend:speech-to-text-->
+</body>
+</html>

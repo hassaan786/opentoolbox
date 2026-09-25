@@ -1,0 +1,25 @@
+<div class="note warn" id="gpu-warning" hidden style="margin:0 0 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><p>Your browser does not support WebGPU, which this tool needs. Try a recent Chrome, Edge or Arc on a desktop or laptop.</p></div>
+<div class="grid-2">
+  <div class="panel stack">
+    <div class="field">
+      <label for="input">Your text</label>
+      <textarea id="input" class="prose" rows="14" placeholder="Paste text here…"></textarea>
+      <span class="hint" id="count"></span>
+    </div>
+    <!--@options-->
+    <div class="row-wrap">
+      <button class="btn" id="go" type="button"><!--@action--></button>
+      <button class="btn-ghost" id="stop" type="button" hidden>Stop</button>
+      <span class="spacer"></span>
+      <div class="field" style="min-width:230px">
+        <label for="model" class="sr-only">Model</label>
+        <select id="model"></select>
+      </div>
+    </div>
+  </div>
+  <div class="panel stack">
+    <div class="row-wrap"><div class="panel-title" style="margin:0">Result</div><span class="spacer"></span><button class="btn-ghost btn-sm" id="copy" type="button">Copy</button></div>
+    <!--@progress-->
+    <pre class="output prose" id="out" aria-live="polite" style="min-height:320px"></pre>
+  </div>
+</div>

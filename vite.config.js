@@ -99,6 +99,10 @@ const partials = () => ({
         `<!--@header-->\n<main id="main">\n<div class="glow" aria-hidden="true"></div>\n<div class="wrap">\n<!--@toolhero:${s}-->`)
       .replace(/<!--@toolend:([a-z0-9-]+)-->/, (_, s) =>
         `<!--@note:${s}-->\n<!--@related:${s}-->\n</div>\n</main>\n<!--@footer-->\n<script type="module" src="/src/tools/${s}.js"></script>`)
+      .replace(/<!--@opts-->([\s\S]*?)<!--@\/opts-->([\s\S]*?)<!--@texttool:([^>]*)-->/, (_, opts, between, action) =>
+        between + partial('text-tool').replace('<!--@options-->', opts).replace('<!--@action-->', esc(action)))
+      .replace(/<!--@texttool:([^>]*)-->/, (_, action) =>
+        partial('text-tool').replace('<!--@options-->', '').replace('<!--@action-->', esc(action)))
       .replace(/<!--@toolhead:([a-z0-9-]+)-->/, (_, s) => `${toolHead(s)}\n<!--@head-->`)
       .replace('<!--@head-->', partial('head'))
       .replace(/<!--@progress(?::([a-z0-9-]+))?-->/g, (_, id = 'progress') =>

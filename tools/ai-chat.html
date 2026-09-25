@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:ai-chat--></head>
+<body>
+<!--@toolstart:ai-chat-->
+<div class="note warn" id="gpu-warning" hidden style="margin:0 0 16px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><p>Your browser does not support WebGPU, which this tool needs. Try a recent Chrome, Edge or Arc on a desktop or laptop.</p></div>
+<div class="panel stack">
+  <div class="row-wrap">
+    <div class="field" style="min-width:260px">
+      <label for="model">Model</label>
+      <select id="model"></select>
+    </div>
+    <span class="spacer"></span>
+    <button class="btn-ghost btn-sm" id="clear" type="button" style="align-self:flex-end">New chat</button>
+  </div>
+  <!--@progress-->
+  <div class="chat" id="chat" aria-live="polite">
+    <p class="chat-empty" id="empty">Ask anything. The model runs on your GPU, so this conversation never leaves your computer. The first message downloads the model once.</p>
+  </div>
+  <form class="chat-form" id="form">
+    <label for="msg" class="sr-only">Message</label>
+    <textarea id="msg" rows="1" placeholder="Message the AI… (Enter to send, Shift+Enter for a new line)"></textarea>
+    <button class="btn" id="send" type="submit">Send</button>
+    <button class="btn-ghost" id="stop" type="button" hidden>Stop</button>
+  </form>
+  <p class="hint">Small local models can be wrong. Check anything important.</p>
+</div>
+<!--@toolend:ai-chat-->
+</body>
+</html>

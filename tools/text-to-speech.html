@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head><!--@toolhead:text-to-speech--></head>
+<body>
+<!--@toolstart:text-to-speech-->
+<div class="panel stack">
+  <div class="field">
+    <label for="text">Text</label>
+    <textarea id="text" class="prose" rows="8" maxlength="5000">Welcome to OpenToolbox. Every tool on this site runs inside your browser, so your files and text never leave your device.</textarea>
+    <span class="hint" id="count"></span>
+  </div>
+  <div class="grid-3">
+    <div class="field">
+      <label for="voice">Voice</label>
+      <select id="voice">
+        <optgroup label="American English">
+          <option value="af_heart">Heart · female</option>
+          <option value="af_bella">Bella · female</option>
+          <option value="af_nicole">Nicole · female, soft</option>
+          <option value="af_sky">Sky · female</option>
+          <option value="am_michael">Michael · male</option>
+          <option value="am_fenrir">Fenrir · male</option>
+          <option value="am_puck">Puck · male</option>
+        </optgroup>
+        <optgroup label="British English">
+          <option value="bf_emma">Emma · female</option>
+          <option value="bf_isabella">Isabella · female</option>
+          <option value="bm_george">George · male</option>
+          <option value="bm_fable">Fable · male</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="field">
+      <label for="speed">Speed: <span id="speed-val">1.0×</span></label>
+      <input type="range" id="speed" min="0.7" max="1.4" step="0.05" value="1">
+    </div>
+    <div class="field" style="justify-content:flex-end">
+      <button class="btn" id="go" type="button">Generate speech</button>
+    </div>
+  </div>
+  <!--@progress-->
+  <div id="result" hidden class="row-wrap">
+    <audio id="player" controls style="flex:1;min-width:260px"></audio>
+    <button class="btn-ghost" id="dl" type="button">Download WAV</button>
+  </div>
+  <p class="hint">English only for now. The voice model is about 90&nbsp;MB and downloads once.</p>
+</div>
+<!--@toolend:text-to-speech-->
+</body>
+</html>
