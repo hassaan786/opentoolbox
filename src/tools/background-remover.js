@@ -51,7 +51,7 @@ async function handle([file]) {
     await model.load((p, label) => prog.set(p, label));
     prog.busy(`Removing background on your ${(await model.device()) === 'webgpu' ? 'GPU' : 'CPU'}…`);
     const t0 = performance.now();
-    const out = await model.run(file);
+    const out = await model.run(file, {}, (p, l) => prog.set(p, l));
     cutout = imageResultToCanvas(out);
     prog.hide();
     render();

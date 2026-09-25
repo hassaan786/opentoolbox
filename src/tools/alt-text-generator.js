@@ -22,7 +22,7 @@ async function run() {
   try {
     await model.load((p, label) => prog.set(p, label));
     prog.busy('Looking at the image…');
-    const text = String(await model.run(file, { task })).trim();
+    const text = String(await model.run(file, { task }, (p, l) => prog.set(p, l))).trim();
     out.textContent = text.charAt(0).toUpperCase() + text.slice(1);
     $$('#copy, #copy-html, #rerun').forEach((b) => { b.disabled = false; });
   } catch (err) {

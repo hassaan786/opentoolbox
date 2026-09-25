@@ -70,7 +70,7 @@ async function handle([file]) {
       stride_length_s: 5,
       task: $('#task').value,
       ...(lang ? { language: lang } : {}),
-    });
+    }, (p, l) => prog.set(p, l));
     chunks = out.chunks?.length ? out.chunks : [{ timestamp: [0, audio.length / 16000], text: out.text }];
     $('#out').textContent = toTxt() || '(No speech detected.)';
     showMedia(file);

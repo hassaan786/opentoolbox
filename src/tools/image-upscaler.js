@@ -36,7 +36,7 @@ async function handle([file]) {
     await model.load((p, label) => prog.set(p, label));
     prog.busy(`Upscaling ${w}×${h} → ${w * scale}×${h * scale}. This can take a minute…`);
     const t0 = performance.now();
-    out = imageResultToCanvas(await model.run(await canvasToBlob(input, 'image/png')));
+    out = imageResultToCanvas(await model.run(await canvasToBlob(input, 'image/png'), {}, (p, l) => prog.set(p, l)));
     // Plain browser resize for the "before" side, at the same size.
     const before = imageToCanvas(input, out.width, out.height);
     prog.hide();

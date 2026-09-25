@@ -73,7 +73,7 @@ async function handle([file]) {
     await model.load((p, label) => prog.set(p, label));
     prog.busy('Estimating depth…');
     const t0 = performance.now();
-    const raw = imageResultToCanvas(await model.run(file));
+    const raw = imageResultToCanvas(await model.run(file, {}, (p, l) => prog.set(p, l)));
     // Scale the depth map back to the photo's size.
     depth = document.createElement('canvas');
     depth.width = photo.naturalWidth; depth.height = photo.naturalHeight;

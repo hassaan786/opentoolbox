@@ -47,33 +47,68 @@ export function hasWebGPU() {
  * Create a model handle.
  * spec: { task, model, dtype?: {webgpu, wasm} | string, preferGPU?: boolean }
  */
+// Some GPUs (often integrated ones) can't run every model on WebGPU, e.g. shader
+// storage-buffer limits. When that happens we fall back to the CPU (WASM) and
+// remember it for this model so the next visit skips the failed GPU attempt.
+const CPU_ONLY_KEY = 'otb.cpuOnly';
+const cpuOnly = () => { try { return JSON.parse(localStorage.getItem(CPU_ONLY_KEY) || '[]'); } catch { return []; } };
+const markCpuOnly = (model) => { try { localStorage.setItem(CPU_ONLY_KEY, JSON.stringify([...new Set([...cpuOnly(), model])])); } catch { /* storage blocked */ } };
+
 export function createModel({ task, model, dtype, preferGPU = true }) {
   let resolved;
+  let forceCPU = cpuOnly().includes(model);
   const resolveSpec = async () => {
     if (resolved) return resolved;
-    const gpu = preferGPU && (await hasWebGPU());
+    const gpu = preferGPU && !forceCPU && (await hasWebGPU());
     const device = gpu ? 'webgpu' : 'wasm';
     const d = typeof dtype === 'object' ? dtype[device] : dtype;
     resolved = { task, model, device, dtype: d };
     return resolved;
   };
-  return {
+  const toCPU = (progress) => {
+    forceCPU = true;
+    resolved = null;
+    markCpuOnly(model);
+    progress?.(null, 'Your GPU could not run this model. Switching to the CPU (slower, but it works)…');
+  };
+  const loadSpec = (spec, progress) => call({ type: 'load', spec }, (e) => {
+    const label = e.total ? `Downloading model · ${formatBytes(e.loaded)} of ${formatBytes(e.total)}` : 'Downloading model…';
+    progress?.(e.progress, label);
+  });
+
+  const handle = {
     async device() { return (await resolveSpec()).device; },
     /** Loads (downloads + compiles) the model. progress(pct|null, label) */
     async load(progress) {
       const spec = await resolveSpec();
       progress?.(null, `Preparing ${spec.device === 'webgpu' ? 'GPU' : 'CPU'} runtime…`);
-      await call({ type: 'load', spec }, (e) => {
-        const label = e.total ? `Downloading model · ${formatBytes(e.loaded)} of ${formatBytes(e.total)}` : 'Downloading model…';
-        progress?.(e.progress, label);
-      });
+      try {
+        await loadSpec(spec, progress);
+      } catch (err) {
+        if (spec.device !== 'webgpu') throw err;
+        console.warn('WebGPU load failed, retrying on CPU:', err);
+        toCPU(progress);
+        await loadSpec(await resolveSpec(), progress);
+      }
     },
     async run(input, runOptions, progress) {
       const spec = await resolveSpec();
+      // Keep a copy: transferring a Float32Array detaches it, and a CPU retry needs it again.
+      const keep = input instanceof Float32Array ? input.slice() : input;
       const transfer = input instanceof Float32Array ? [input.buffer] : [];
-      return call({ type: 'run', spec, input, runOptions }, (e) => progress?.(e.progress, 'Downloading model…'), transfer);
+      try {
+        return await call({ type: 'run', spec, input, runOptions }, (e) => progress?.(e.progress, 'Downloading model…'), transfer);
+      } catch (err) {
+        if (spec.device !== 'webgpu') throw err;
+        console.warn('WebGPU run failed, retrying on CPU:', err);
+        toCPU(progress);
+        await handle.load(progress);
+        progress?.(null, 'Running on the CPU…');
+        return call({ type: 'run', spec: await resolveSpec(), input: keep, runOptions }, null);
+      }
     },
   };
+  return handle;
 }
 
 /** Plain image result → canvas. Handles 1, 3 and 4 channel data. */
