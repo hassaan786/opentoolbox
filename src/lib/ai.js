@@ -1,34 +1,37 @@
 // Main-thread client for ai.worker.js.
 import { formatBytes } from './ui.js';
 
-let worker;
+// One worker per backend. ONNX Runtime keeps using WebGPU inside a worker once it
+// has been initialised there, so CPU (WASM) work always gets its own clean worker.
+const workers = {};
 let seq = 0;
 const pending = new Map();
 
-function getWorker() {
-  if (!worker) {
-    worker = new Worker(new URL('./ai.worker.js', import.meta.url), { type: 'module' });
-    worker.onmessage = ({ data }) => {
+function getWorker(kind) {
+  if (!workers[kind]) {
+    const w = new Worker(new URL('./ai.worker.js', import.meta.url), { type: 'module', name: `ai-${kind}` });
+    w.onmessage = ({ data }) => {
       const p = pending.get(data.id);
       if (!p) return;
       if (data.type === 'progress') { p.onProgress?.(data); return; }
       pending.delete(data.id);
       data.type === 'error' ? p.reject(new Error(data.error)) : p.resolve(data.result);
     };
-    worker.onerror = (e) => {
-      for (const p of pending.values()) p.reject(new Error(e.message || 'The AI worker crashed. Try a smaller file or reload.'));
-      pending.clear();
-      worker = null;
+    w.onerror = (e) => {
+      for (const [id, p] of pending) if (p.kind === kind) { p.reject(new Error(e.message || 'The AI worker crashed. Try a smaller file or reload.')); pending.delete(id); }
+      delete workers[kind];
     };
+    workers[kind] = w;
   }
-  return worker;
+  return workers[kind];
 }
 
 function call(msg, onProgress, transfer = []) {
   const id = ++seq;
+  const kind = msg.spec.device === 'webgpu' ? 'gpu' : 'cpu';
   return new Promise((resolve, reject) => {
-    pending.set(id, { resolve, reject, onProgress });
-    getWorker().postMessage({ id, ...msg }, transfer);
+    pending.set(id, { resolve, reject, onProgress, kind });
+    getWorker(kind).postMessage({ id, ...msg }, transfer);
   });
 }
 
